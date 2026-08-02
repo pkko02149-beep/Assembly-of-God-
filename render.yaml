@@ -1,0 +1,31 @@
+# Render deployment config for the School Management API server
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: school-mgmt-api
+    runtime: node
+    plan: free                   # upgrade to "starter" ($7/mo) for no sleeping
+    rootDir: .
+    buildCommand: "npm install -g pnpm@latest && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/api-server run build"
+    startCommand: "node --enable-source-maps artifacts/api-server/dist/index.mjs"
+    healthCheckPath: /api/healthz
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DATABASE_URL
+        sync: false              # set manually in Render dashboard
+      - key: SESSION_SECRET
+        sync: false              # set manually in Render dashboard
+      # Optional — required for email features
+      - key: GMAIL_USER
+        sync: false
+      - key: GMAIL_APP_PASSWORD
+        sync: false
+      # Optional — required for push notifications
+      - key: VAPID_PUBLIC_KEY
+        sync: false
+      - key: VAPID_PRIVATE_KEY
+        sync: false
+      - key: VAPID_SUBJECT
+        sync: false

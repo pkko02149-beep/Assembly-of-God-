@@ -1,0 +1,27 @@
+{
+  "version": 2,
+  "buildCommand": "npm install -g pnpm@latest && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/school-mgmt run build",
+  "outputDirectory": "artifacts/school-mgmt/dist/public",
+  "framework": null,
+  "build": {
+    "env": {
+      "BASE_PATH": "/"
+    }
+  },
+  "rewrites": [
+    {
+      "source": "/api/:path*",
+      "destination": "https://REPLACE-WITH-YOUR-RENDER-URL.onrender.com/api/:path*"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
