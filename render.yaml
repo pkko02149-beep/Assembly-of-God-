@@ -7,7 +7,7 @@ services:
     runtime: node
     plan: free                   # upgrade to "starter" ($7/mo) for no sleeping
     rootDir: .
-    buildCommand: "npm install -g pnpm@latest && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/api-server run build"
+    buildCommand: "npm install pnpm@latest --no-save && ./node_modules/.bin/pnpm install --no-frozen-lockfile && ./node_modules/.bin/pnpm --filter @workspace/api-server run build"
     startCommand: "node --enable-source-maps artifacts/api-server/dist/index.mjs"
     healthCheckPath: /api/healthz
     envVars:
