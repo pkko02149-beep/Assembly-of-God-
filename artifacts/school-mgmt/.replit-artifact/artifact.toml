@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "School Management"
+description = "A full-featured school management system for admins, teachers, and parents. Covers student records, attendance, fees, exams, homework, timetables, and parent communication."
+version = "1.0.0"
+id = "artifacts/school-mgmt"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18953
+
+[services.development]
+run = "pnpm --filter @workspace/school-mgmt run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/school-mgmt", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/school-mgmt/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18953"
+BASE_PATH = "/"
