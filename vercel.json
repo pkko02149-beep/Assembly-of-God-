@@ -1,6 +1,7 @@
 {
   "version": 2,
-  "buildCommand": "npm install -g pnpm@latest && pnpm install --no-frozen-lockfile && pnpm --filter @workspace/school-mgmt run build",
+  "installCommand": "pnpm install --no-frozen-lockfile",
+  "buildCommand": "pnpm --filter @workspace/school-mgmt run build",
   "outputDirectory": "artifacts/school-mgmt/dist/public",
   "framework": null,
   "build": {
